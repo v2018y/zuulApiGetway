@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// We don't need CSRF for this example
 		httpSecurity.cors().and().csrf().disable()
 				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/oauth/token", "/register", "/", "/swagger**", "/webjars/**",
+				.authorizeRequests().antMatchers("/oauth/token", "/register", "/","/user", "/swagger**", "/webjars/**",
 						"/v2/**", "/swagger-resources/**")
 				.permitAll().
 				// all other requests need to be authenticated

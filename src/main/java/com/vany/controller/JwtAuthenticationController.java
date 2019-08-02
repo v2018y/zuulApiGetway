@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ import com.vany.model.DAOUser;
 import com.vany.model.JwtRequest;
 import com.vany.model.JwtResponse;
 import com.vany.model.UserDTO;
+import com.vany.repositeroy.UserDao;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -43,7 +45,29 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
+	
+	@Autowired
+	UserDao userDao;
 
+	public DAOUser  getUser() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if(principal instanceof UserDetails) {
+			username =((UserDetails)principal).getUsername();
+		}else {
+			username=principal.toString();
+		}
+		System.out.println("Your User Name :"+username);
+		DAOUser daoUser=userDao.findByUsername(username);
+		return daoUser;
+	}
+	
+	
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public DAOUser getUserDetails() throws Exception {
+		return getUser();
+	}
+	
 	@RequestMapping(value = "/oauth/token", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
