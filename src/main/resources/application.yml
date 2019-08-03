@@ -1,0 +1,12 @@
+zuul:
+    host:
+        connect-timeout-millis: 50000
+        socket-timeout-millis: 10000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
