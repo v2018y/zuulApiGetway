@@ -65,10 +65,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/register", 
 						"/",
 						"/user", 
-						"/bar-services/swagger**", 
-						"/bar-serivces/webjars/**",
-						"/bar-serivces/v2/**", 
-						"/bar-serivces/swagger-resources/**"
+						"/swagger**", 
+						"/webjars/**",
+						"/v2/**", 
+						"/swagger-resources/**",
+						"/bar-services/v2/api-docs",
+						"/hotel-api/swagger/v1/swagger.json"
 			    ).permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().

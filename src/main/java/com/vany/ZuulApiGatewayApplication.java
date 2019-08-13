@@ -13,21 +13,22 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.ws.config.annotation.EnableWs;
 
+import springfox.documentation.swagger.web.UiConfiguration;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 
 @EnableEurekaClient
 @EnableZuulProxy
 @SpringBootApplication
+@EnableSwagger2
 public class ZuulApiGatewayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ZuulApiGatewayApplication.class, args);
 	}
-	
 	@Bean
-	 public UserDetailsService userDetailsService() {
-	  UserDetails user = User.withDefaultPasswordEncoder().username("user").password("password").roles("USER")
-	   .build();
-	  return new InMemoryUserDetailsManager(user);
-	 }
-
+	UiConfiguration uiConfig() {
+		return new UiConfiguration("validatorUrl", "list", "alpha", "schema",
+				UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS, false, true, 60000L);
+	}
 }
