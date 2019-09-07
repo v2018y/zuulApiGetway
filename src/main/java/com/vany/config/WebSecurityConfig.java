@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/v2/**", 
 						"/swagger-resources/**",
 						"/bar-services/v2/api-docs",
-						"/hotel-api/swagger/v1/swagger.json"
+						"/hotel-api/api-docs/v1/swagger.json"
 			    ).permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().

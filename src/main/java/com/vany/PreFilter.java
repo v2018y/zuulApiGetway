@@ -48,7 +48,7 @@ public class PreFilter extends ZuulFilter {
 		ctx.getRequest().getRequestURL();
 		System.out.println("Url " + ctx.getRequest().getRequestURL().indexOf("/v2/api-docs")+ " ASP URL "+ ctx.getRequest().getRequestURL().indexOf("/swagger"));
 		// this Functions Which URl Calling and according TO Filter
-		if (ctx.getRequest().getRequestURL().indexOf("/v2/api-docs") < 0 && ctx.getRequest().getRequestURL().indexOf("/swagger/v1/swagger.json") < 0  ) {
+		if (ctx.getRequest().getRequestURL().indexOf("/v2/api-docs") < 0 && ctx.getRequest().getRequestURL().indexOf("/api-docs/v1/swagger.json") < 0  ) {
 			System.out.println("Token " + jwtRequestFilter.requestTokenHeader);
 			String Token = jwtRequestFilter.requestTokenHeader.substring(7);
 			String username = jwtTokenUtil.getUsernameFromToken(Token);
